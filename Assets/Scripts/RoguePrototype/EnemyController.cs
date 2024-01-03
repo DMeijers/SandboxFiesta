@@ -28,8 +28,14 @@ public class EnemyController : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        transform.LookAt(player);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // Check if the player is on the same level and within a certain distance
+        if (distanceToPlayer < 10f && Mathf.Abs(transform.position.y - player.position.y) < 2f)
+        {
+            transform.LookAt(player);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
     }
 
     void SpawnAtRandomPosition()
